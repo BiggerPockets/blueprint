@@ -1,8 +1,14 @@
-## Welcome to GitHub Pages
+# blueprint
+## the BiggerPockets product & engineering blog
 
 You can use the [editor on GitHub](https://github.com/BiggerPockets/blueprint/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+
+To run the site locally 
+`bundle install`
+`bundle exec jekyll serve`
+Preview your local Jekyll site in your web browser at `http://localhost:4000`.
 
 ### Markdown
 
