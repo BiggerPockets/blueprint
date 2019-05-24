@@ -6,9 +6,22 @@ You can use the [editor on GitHub](https://github.com/BiggerPockets/blueprint/ed
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
 To run the site locally 
+
 `bundle install`
+
 `bundle exec jekyll serve`
+
 Preview your local Jekyll site in your web browser at `http://localhost:4000`.
+
+ If you run Jekyll locally with the `--drafts` flag (e.g., `jekyll serve --drafts`), Jekyll will include any posts in the _drafts folder, just as if they were published post (but don't worry, only locally)
+
+### Contributing
+
+1. Create a branch
+2. Add the file _drafts/<slug>.md with the content you would like to submit.
+   1. Include keywords you would like to target in the slug and title.
+   2. Add the following data to your post: 
+3. Open a PR then private message your manager.
 
 ### Markdown
 
@@ -41,3 +54,4 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+
