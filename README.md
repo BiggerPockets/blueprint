@@ -21,6 +21,15 @@ Preview your local Jekyll site in your web browser at `http://localhost:4000`.
 2. Add the file _drafts/<slug>.md with the content you would like to submit.
    1. Include keywords you would like to target in the slug and title.
    2. Add the following data to your post: 
+      1. title
+      2. description
+      3. tags
+      4. image 
+         1.  Do NOT include an image that we do not have the appropriate licence to
+         2.  https://www.pexels.com has many free to use images
+         3.  Commit a 670x446 sized image
+      5. excerpt (optional)
+   3. Commit reasonably sized images for anything embedded in your post.
 3. Open a PR then private message your manager.
 
 ### Markdown

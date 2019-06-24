@@ -5,6 +5,7 @@
     <li>
       <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
       <p>{{ post.excerpt }}</p>
+      <img src="{{ post.image }}" />
     </li>
   {% endfor %}
 </ul>
