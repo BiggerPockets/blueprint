@@ -1,6 +1,6 @@
 ---
 author: first_name last_name
-title: A good starting part
+title: A starting part
 description: An example of how to write a blueprint blog post.
 excerpt: Start here if you want to be our next author!
 tags: culture ux
