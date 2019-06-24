@@ -3,7 +3,7 @@ author: first_name last_name
 title: A starting part
 description: An example of how to write a blueprint blog post.
 excerpt: Start here if you want to be our next author!
-tags: culture ux
+tags: product engineering design product_management culture ux career_growth
 image: /assets/images/blank-branding-identity-business-cards-6372.jpg
 ---
 Adding a post to the blueprint blog may seem daunting, but it is actually fun and easy! Read README.md,
