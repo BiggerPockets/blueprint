@@ -21,12 +21,6 @@
             <h1>{{ site.title | default: site.github.repository_name }}</h1>
         </a>
         <h2>{{ site.description | default: site.github.project_tagline }}</h2>
-        {% if site.github.is_project_page %}
-        <a href="{{ site.github.repository_url }}" class="button"><small>View project on</small> GitHub</a>
-        {% endif %}
-        {% if site.github.is_user_page %}
-        <a href="{{ site.github.owner_url }}" class="button"><small>Follow me on</small> GitHub</a>
-        {% endif %}
     </div>
 </header>
 
@@ -37,24 +31,34 @@
         </section>
 
         <aside id="sidebar">
-            <a href="https://www.biggerpockets.com/" class="button">
-                Home
-            </a>
+            <h3>
+                <a href="/" class="home">
+                    Blueprint Home
+                </a>
+            </h3>
 
-            <a href="https://www.biggerpockets.com/jobs" class="button">
-                Jobs
-            </a>
+            <h3>
+                <a href="/" class="home">
+                    BiggerPockets
+                </a>
+            </h3>
 
-            <h3>Topics</h3>
-            <ul>
-                <li><a href="">PRODUCT</a></li>
-                <li><a href="">ENGINEERING</a></li>
-                <li><a href="">DESIGN</a></li>
-                <li><a href="">PRODUCT MANAGEMENT</a></li>
-                <li><a href="">UX</a></li>
-                <li><a href="">CULTURE</a></li>
-                <li><a href="">CAREER GROWTH</a></li>
-            </ul>
+            <h3>
+                <a href="https://www.biggerpockets.com/jobs" class="jobs">
+                    Jobs @ BiggerPockets
+                </a>
+            </h3>
+
+            <!--<h3>Topics</h3>-->
+            <!--<ul>-->
+                <!--<li><a href="">PRODUCT</a></li>-->
+                <!--<li><a href="">ENGINEERING</a></li>-->
+                <!--<li><a href="">DESIGN</a></li>-->
+                <!--<li><a href="">PRODUCT MANAGEMENT</a></li>-->
+                <!--<li><a href="">UX</a></li>-->
+                <!--<li><a href="">CULTURE</a></li>-->
+                <!--<li><a href="">CAREER GROWTH</a></li>-->
+            <!--</ul>-->
         </aside>
     </div>
 </div>
