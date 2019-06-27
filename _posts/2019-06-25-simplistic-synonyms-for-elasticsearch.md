@@ -1,8 +1,8 @@
 ---
 author: David Daily
 title: Simplistic Synonyms for Elasticsearch
-
 tags: elasticsearch synonym
+image: /assets/images/beverage-browsing-coffee-1157858.jpg
 ---
 
 For this article, you should already have knowledge of Elasticsearch and of some relatively basic concepts like `tokens`, `analyzers`, and simple `bool` queries. If you need some background on these topics, or help setting up a local Elasticsearch instance, check out:
