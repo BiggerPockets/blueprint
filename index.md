@@ -1,3 +1,6 @@
+---
+disable_comments: true
+---
 <h1>Latest Posts</h1>
 
 <ul>

@@ -30,8 +30,21 @@
       {% if page.title %}
         <h1>{{ page.title }}</h1>
       {% endif %}
+
       <img src="{{ page.image }}" />
+
       {{ content }}
+
+      {% unless page.disable_comments %}
+        <script src="https://utteranc.es/client.js"
+                repo="biggerpockets/blueprint"
+                issue-term="pathname"
+                label="Comment"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+        </script>
+      {% endunless %}
     </section>
 
     <aside id="sidebar">
