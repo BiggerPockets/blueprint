@@ -1,13 +1,15 @@
 ---
 author: Ben Stacey
-title: Adding PostGIS support to Rails
+title: PostGIS in Rails 6
 description: Steps required to add PostGIS support to Rails 6 with use cases and pre amble
 tags: product engineering
 image: /assets/images/insights-comps.png
 ---
-# PostGIS support in Rails 6
+# PostGIS in Rails 6
 
-Here at BiggerPockets Engineering, we have been busy building the first iteration of the new BPInsights Rent Estimator for Beta launch. [https://biggerpockets.com/insights/property-searches/new] [1]
+Here at BiggerPockets Engineering, we have been busy building the first iteration of the new BPInsights Rent Estimator for Beta launch (You can check out the entire feature at [https://biggerpockets.com/insights/property-searches/new] [1]).
+<br/>
+<br/>
 We have more than 100 million property records containing fields such as street address, ZIP code, property type; as well as associated records containing rental and sale price data, when the price data was recorded, valuation data and much more.
 <br/>
 <br/>
@@ -27,7 +29,7 @@ Heroku serves our application and has a proven track record of working with Post
 <br/>
 That's not to say we recommend PostGIS for every project that requires distance-based querying - see this excellent article by Krzysztof Zych on why you _shouldn't_ use PostGIS:
 
-[[https://blog.rebased.pl/2020/04/07/why-you-probably-dont-need-postgis.html]] [2]
+[https://blog.rebased.pl/2020/04/07/why-you-probably-dont-need-postgis.html] [2]
 
 ## The code
 
@@ -106,8 +108,8 @@ In terms of CI, you will need to amend the source database Docker image that you
 Our database cleaning strategy was truncating the `spatial_ref_sys` table. This table stores constants and reference values required for various PostGIS calculations. If starting a Rails instance throws an `unable to find table: spatial_ref_sys` error you should alter your database cleaning configuration to ignore this table with code like the following:
 
 ```diff
-+    DatabaseCleaner.clean_with(:deletion, cache_tables: false)
--    DatabaseCleaner.clean_with(:deletion, cache_tables: false, except: %w(spatial_ref_sys))
+-    DatabaseCleaner.clean_with(:deletion, cache_tables: false)
++    DatabaseCleaner.clean_with(:deletion, cache_tables: false, except: %w(spatial_ref_sys))
 ```
 
 If you need to rebuild the `spatial_ref_sys` table after an errant deletion you can run the following `psql` command:
@@ -153,7 +155,6 @@ def self.distance_conversion_node(miles)
     Arel::Nodes::build_quoted(METRES_IN_MILE)
   )
 end
-private_class_method :distance_conversion_node
 
 def self.st_point_node(long, lat)
   Arel::Nodes::NamedFunction.new(
@@ -161,5 +162,8 @@ def self.st_point_node(long, lat)
     [Arel::Nodes.build_quoted(long), Arel::Nodes.build_quoted(lat)]
   )
 end
-private_class_method :st_point_node
 ```
+
+[1]: [https://biggerpockets.com/insights/property-searches/new]
+[2]: [https://blog.rebased.pl/2020/04/07/why-you-probably-dont-need-postgis.html]
+[3]: [https://postgis.net/docs/PostGIS_FAQ.html]
