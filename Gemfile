@@ -1,4 +1,5 @@
 source "https://rubygems.org"
-ruby "2.6.5"
+ruby "3.1.2"
 
 gem "github-pages", group: :jekyll_plugins
+gem "webrick"
