@@ -235,7 +235,7 @@ Change the logging in your error reporter. And it reflects everywhere you use `R
 
 The error reporter instances are very small Ruby classes, so they're easy to test.
 
-It'd be very easy to write an in memory test only subscriber, meaning your tests just got easier to write and faster too.
+It'd be very easy to write [testing helpers for error reporting](https://github.com/rails/rails/pull/46029), meaning your tests just got easier to write and faster too.
 
 ### 4. Severity levels
 
