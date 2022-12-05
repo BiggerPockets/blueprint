@@ -7,7 +7,13 @@ tags: product engineering rails
 image: /assets/images/error-report.jpg
 ---
 
-## Context
+Rails 7 includes a new error reporting pattern.
+
+The new pattern introduces decoupled error handlers whilst reducing repetitious boilerplate code.
+
+Handle your errors in one simple clean line of code. Let's see how.
+
+## Example
 
 * Writing code to request a quote from an external JSON API
 * When the API request fails, we want to:
