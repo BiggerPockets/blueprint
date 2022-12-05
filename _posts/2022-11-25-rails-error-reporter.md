@@ -1,6 +1,6 @@
 ---
 author: John Gallagher
-title: Gracefully handling errors with Rails 7
+title: Gracefully handle errors in Rails 7
 description: Rails 7 adds an error handling API. How can we use it to remove duplication?
 excerpt: Rails 7 includes a new error reporting pattern. Handle your errors in one simple clean line of code. Let's see how.
 tags: product engineering rails
@@ -96,8 +96,6 @@ Examples of changes:
 ## The solution
 
 Rails 7 introduces a new API - [`Rails.error`](https://edgeguides.rubyonrails.org/error_reporting.html).
-
-### Usage
 
 ### 1. Write an error subscriber
 
@@ -277,7 +275,7 @@ But as with all abstractions, when you do want to know the details, it can be a 
 
 We can't rescue multiple exceptions yet. But [this PR, when released](https://github.com/rails/rails/pull/46299) will add that.
 
-# Summary
+## Summary
 
 The Rails team have done an wonderful job of creating a clean, easy to use API that solves a big problem.
 
