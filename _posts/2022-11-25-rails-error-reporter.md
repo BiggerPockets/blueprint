@@ -4,7 +4,7 @@ title: Gracefully handling errors with Rails 7
 description: Rails 7 adds an error handling API. How can we use it to remove duplication?
 excerpt: Rails 7 includes a new error reporting pattern. Handle your errors in one simple clean line of code. Let's see how.
 tags: product engineering rails
-image: /assets/images/blank-branding-identity-business-cards-6372.jpg
+image: /assets/images/error-report.jpg
 ---
 
 ## Context
