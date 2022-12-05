@@ -66,17 +66,19 @@ The code forces us to make the same decisions over and over again:
 * What context do we pass along to Sentry?
 * What level of error do we raise in Sentry?
 
-As a result, in my experience, error handling in Rails codebases tends to be wildly inconsistent.
+As a result, error handling in Rails codebases tends to be wildly inconsistent.
 
-It either causes too much noise in the logs or gives too few details when debugging.
+We either get too much noise in the logs or get too few details when debugging.
 
 ### 2. Difficult to read
 
 This code is noisy. It contains a lot of details we don't care about.
 
+There's duplication of `logger.error`, `Sentry.capture_exception`.
+
 The code doesn't tell us concisely what it's doing.
 
-It has abstractions that are low level.
+It has abstractions that are too low level.
 
 ### 3. Tightly coupled
 
@@ -88,7 +90,7 @@ Examples of changes:
 
 * Swapping out Sentry for New Relic
 * Adding Rollbar error tracking
-* Adding structured logging with Semantic Logger (which has a different interface to Ruby Logger)
+* Adding structured logging with [Semantic Logger](https://logger.rocketjob.io/index.html) (has a different interface to Ruby Logger)
 * Adding extra context to all error tracking (e.g. user IDs)
 
 ## The solution
@@ -97,10 +99,10 @@ Rails 7 introduces a new API - [`Rails.error`](https://edgeguides.rubyonrails.or
 
 ### Usage
 
-### 1. Create handler class
+### 1. Write an error subscriber
 
 ```ruby
-class LoggingErrorHandler
+class LoggingErrorSubscriber
   def initialize(logger: Rails.logger)
     @logger = logger
   end
@@ -115,7 +117,7 @@ end
 
 ```ruby
 # config/initializers/semantic_logger.rb
-Rails.error.subscribe(LoggingErrorHandler.new)
+Rails.error.subscribe(LoggingErrorSubscriber.new)
 
 # config/initializers/sentry.rb
 # Sentry::Rails::ErrorSubscriber comes with Sentry
@@ -127,6 +129,7 @@ Rails.error.subscribe(Sentry::Rails::ErrorSubscriber.new)
 ```ruby
 class RequestQuotes
   def call(id)
+    # Errors handled in one line - concise and intention revealing
     Rails.error.handle(HTTPFailure) do
       http_client.get("/api/v1/quotes/#{id}.json")
     end
@@ -154,7 +157,7 @@ result # => nil
 1 + 1 # This will be executed
 ```
 
-Passes `severity: :warning` to the error handler.
+Passes `severity: :warning` to the error subscriber.
 
 **2. Reporting and reraising errors with `#record`**
 
@@ -165,7 +168,7 @@ end
 1 + 1 # This won't be executed
 ```
 
-Passes `severity: :error` to the error handler.
+Passes `severity: :error` to the error subscriber.
 
 **3. Manually reporting errors with `#report`**
 
@@ -194,7 +197,7 @@ It will accept any object that responds to `#call`.
 
 Pass in `context:` for the error to help with debugging.
 
-Each error handler gets to decide what to do with this context.
+This is passed along to the error reporter.
 
 ```ruby
 Rails.error.handle(HTTPFailure, context: { user_id: "123456" }) do
@@ -212,23 +215,27 @@ class SetUserIdMiddleware
 end
 ```
 
-Every `Rails.error.handle` after this will include the context.
+Every `Rails.error.handle` called afterwards will include the context.
 
 ## Advantages
 
 ### 1. Standardised
 
-Make the decision about how to handle errors once, write the handler once, then move on.
+Make the decision about how to handle errors once, write the subscriber once, then move on.
 
 ### 2. Decoupled
 
-Want to add more error reporters? No worries, create a new class, subscribe and now all your errors go to the new reporter. Very powerful!
+Want to send errors to a different error reporting platform?
 
-Want to change how logging works? Change it in one place. And it reflects everywhere you use `Rails.error`.
+Write a new class that responds to `#report`, subscribe and now every call to `Rails.error` will send the error along.
+
+Want to change how logging works?
+
+Change the logging in your error reporter. And it reflects everywhere you use `Rails.error`.
 
 ### 3. Testable
 
-The subscribers are very small Ruby classes, so they're easy to test.
+The error reporter instances are very small Ruby classes, so they're easy to test.
 
 It'd be very easy to write an in memory test only subscriber, meaning your tests just got easier to write and faster too.
 
@@ -238,11 +245,13 @@ The severity is passed to each subscriber and they decide how to report it.
 
 For warnings, we can now log them all as `#warn` very easily.
 
-### 5. Structured logging
+### 5. Great for structured logging
 
-A perfect fit for structured logging. We can pass around relevant `context` and the error handlers can log as necessary.
+We pass around `context` and the error subscribers can log this extra detail.
 
-At `BiggerPockets` we've gone a stage further and created a `StructuredError` object that can hold context.
+Ideal for tagging log entries with user IDs, transaction IDs or other cross cutting data that provides better debugging.
+
+At `BiggerPockets` we've gone a stage further and created a `StructuredError` object which stores this context.
 
 ### 6. Cleaner
 
@@ -266,14 +275,16 @@ But as with all abstractions, when you do want to know the details, it can be a 
 
 ### 4. Missing features
 
-We can't rescue multiple exceptions yet. But it's just a matter of time before that becomes available.
+We can't rescue multiple exceptions yet. But [this PR, when released](https://github.com/rails/rails/pull/46299) will add that.
 
 # Summary
 
-In summary, the Rails team have done an wonderful job of creating a clean, easy to use API that solves a real problem.
+The Rails team have done an wonderful job of creating a clean, easy to use API that solves a big problem.
 
 You can [read more in the Rails Edge guides](https://edgeguides.rubyonrails.org/error_reporting.html).
 
 Happy error handling!
 
 By [John Gallagher](https://github.com/johngallagher)
+
+Photo by [David Pupaza](https://unsplash.com/@dav420?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/error?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
