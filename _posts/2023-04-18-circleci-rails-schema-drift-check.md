@@ -18,7 +18,7 @@ changes into the `db/schema.rb` file via a migration.
 Here are BiggerPockets, we've started to run into this problem as the pace of development has picked up. To address
 this common problem, we wrote and installed a CircleCI configuration that runs a task to compare each PR's schema
 against what's currently checked in to main. If the branch includes a migration, the task loads whatever the main
-branch's schema is, runs this branches migrations, and then compares the resulting schema to what's being proposed in
+branch's schema is, runs the branch's migrations, and then compares the resulting schema to what's being proposed in
 the Pull Request. If there's a difference, the schema has drifted.
 
 Here's an abbreviated version of the task. Note that it doesnt include some necessary steps for installing dependencies
