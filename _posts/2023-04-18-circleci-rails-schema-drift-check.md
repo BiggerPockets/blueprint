@@ -21,7 +21,7 @@ against what's currently checked in to main. If the branch includes a migration,
 branch's schema is, runs the branch's migrations, and then compares the resulting schema to what's being proposed in
 the Pull Request. If there's a difference, the schema has drifted.
 
-Here's an abbreviated version of the task. Note that it doesnt include some necessary steps for installing dependencies
+Here's an abbreviated version of the task. Note that it doesn't include some necessary steps for installing dependencies
 since that will depend on how you've configured your pipeline.
 
 ```
