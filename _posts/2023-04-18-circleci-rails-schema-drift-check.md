@@ -1,5 +1,5 @@
 ---
-author: Aaron Breckenridge
+author: Aaron Breckenridge and Rajaa Boulassouak
 title: Checking for Rails schema drift in CircleCI
 description: Schema drift is a common problem that teams encounter as their teams get larger and the pace picks up. This article describes how we tackled that at BiggerPockets.
 tags: engineering rails
