@@ -1,6 +1,6 @@
 ---
 author: Aaron Breckenridge
-title: Tracking unused rails view partials with DataDog and Github Actions
+title: Tracking unused Rails view partials with DataDog and Github Actions
 description: How BiggerPockets keeps track of unused view partials to make it easier to eliminiate dead code
 tags: engineering rails
 ---
